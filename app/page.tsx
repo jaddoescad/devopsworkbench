@@ -1,0 +1,141 @@
+import Image from "next/image";
+import type { JSX } from "react";
+
+const heroHighlights = [
+  {
+    id: "roadmap",
+    content: (
+      <>
+        Follow a <strong className="font-semibold">step-by-step roadmap</strong> to mastery
+      </>
+    ),
+  },
+  {
+    id: "infrastructure",
+    content: (
+      <>
+        Build <strong className="font-semibold">real-world CI/CD</strong> and cloud infrastructure
+      </>
+    ),
+  },
+  {
+    id: "career",
+    content: (
+      <>
+        Land your <strong className="font-semibold">dream tech job</strong>
+      </>
+    ),
+  },
+];
+
+export default function Home(): JSX.Element {
+  return (
+    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+      <header className="border-b border-[var(--global-palette7)] bg-white/75 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-0.5 sm:py-1.5">
+          <div className="flex items-center gap-3">
+            <Image
+              src="/logo.png"
+              alt="DevOps Workbench logo"
+              width={200}
+              height={50}
+              priority
+            />
+          </div>
+          <a
+            href="#get-started"
+            className="inline-flex items-center rounded-xl bg-[var(--global-palette1)] px-6 py-2.5 text-base font-semibold text-white shadow-md transition hover:bg-[var(--global-palette2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--global-palette1)]"
+          >
+            Get started
+          </a>
+        </div>
+      </header>
+
+      <main className="mx-auto flex max-w-6xl flex-col gap-12 px-6 pb-20 pt-12 sm:pb-28">
+        <section className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[var(--global-palette1)]">
+                Live Sessions and Courses
+              </p>
+              <h1 className="text-4xl font-semibold tracking-tight text-[var(--global-palette3)] sm:text-5xl">
+                Land a Higher Paying Job with
+                <span className="ml-2 text-[var(--global-palette1)]">DevOps</span>
+              </h1>
+              <p className="max-w-xl text-lg text-[var(--global-palette4)]">
+                Learn <strong className="font-semibold">DevOps</strong> with no prior experience and move from
+                fundamentals to production-ready skills.
+              </p>
+            </div>
+            <ul className="space-y-3 text-base text-[var(--global-palette4)]">
+              {heroHighlights.map((item) => (
+                <li key={item.id} className="flex items-start gap-3">
+                  <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--global-palette1)]" />
+                  <span className="leading-relaxed">{item.content}</span>
+                </li>
+              ))}
+            </ul>
+            <div id="get-started" className="flex flex-wrap items-center gap-4">
+              <a
+                className="inline-flex items-center rounded-lg border border-[var(--global-palette1)] bg-[var(--global-palette1)] px-6 py-3 text-base font-semibold text-white shadow-lg transition hover:bg-[var(--global-palette2)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--global-palette1)]"
+                href="mailto:hello@example.com"
+              >
+                Launch Your Career
+              </a>
+              <span className="text-sm text-[var(--global-palette5)]">
+                Step-by-step roadmap • Real-world infrastructure • Career support
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center">
+            <div className="surface-card relative aspect-[16/9] w-full max-w-[520px] overflow-hidden rounded-3xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-[var(--global-palette1)]/10 via-transparent to-[var(--global-palette2)]/15" />
+              <div className="relative flex h-full flex-col items-center justify-center gap-4 px-10 text-center">
+                <span className="text-sm font-semibold uppercase tracking-[0.3em] text-[var(--global-palette5)]">
+                  Program Preview
+                </span>
+                <p className="max-w-xs text-base font-semibold text-[var(--global-palette3)]">
+                  Video Placeholder
+                </p>
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--global-palette1)]/12 text-[var(--global-palette1)]">
+                  <span className="ml-1 text-xl font-semibold">▶</span>
+                </div>
+                <p className="text-xs text-[var(--global-palette5)]">
+                  Drop in your welcome or overview video here.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="grid gap-6 rounded-3xl border border-[var(--global-palette7)] bg-white p-8 shadow-lg sm:grid-cols-3">
+          <article className="space-y-2">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--global-palette5)]">
+              Pipelines
+            </h2>
+            <p className="text-sm text-[var(--global-palette4)]">
+              Wire together CI/CD workflows with guardrails, previews, and instant rollbacks.
+            </p>
+          </article>
+          <article className="space-y-2">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--global-palette5)]">
+              Observability
+            </h2>
+            <p className="text-sm text-[var(--global-palette4)]">
+              Centralize logs, metrics, and alerts so teams act on the same real-time data.
+            </p>
+          </article>
+          <article className="space-y-2">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--global-palette5)]">
+              Collaboration
+            </h2>
+            <p className="text-sm text-[var(--global-palette4)]">
+              Share dashboards and runbooks with context-rich annotations for smoother handoffs.
+            </p>
+          </article>
+        </section>
+      </main>
+    </div>
+  );
+}

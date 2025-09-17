@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+
+:root {
+  --background: #fff7f5;
+  --foreground: #0A1F41;
+  --global-palette1: #0b789b;
+  --global-palette2: #289bc0;
+  --global-palette3: #0A1F41;
+  --global-palette4: #6E747C;
+  --global-palette5: #989898;
+  --global-palette6: #d1d1d1;
+  --global-palette7: #d8dee3;
+  --global-palette8: #fff7f5;
+  --global-palette9: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: radial-gradient(circle at 20% 0%, rgba(11, 120, 155, 0.14), transparent 65%),
+    radial-gradient(circle at 80% 25%, rgba(40, 155, 192, 0.08), transparent 55%), var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.surface-card {
+  background: var(--global-palette9);
+  border: 1px solid var(--global-palette7);
+  box-shadow: 0 18px 38px rgba(10, 31, 65, 0.08);
+}
