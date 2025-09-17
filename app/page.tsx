@@ -1,5 +1,12 @@
+import { existsSync, readdirSync } from "node:fs";
+import path from "node:path";
 import Image from "next/image";
 import type { JSX } from "react";
+
+type CompanyLogo = {
+  name: string;
+  src: string;
+};
 
 const heroHighlights = [
   {
@@ -27,6 +34,55 @@ const heroHighlights = [
     ),
   },
 ];
+
+const logoExtensions = [".svg", ".webp", ".png", ".jpg", ".jpeg"] as const;
+
+const logoDirectory = path.join(process.cwd(), "public", "companies_worked_at");
+
+function formatLogoName(fileName: string): string {
+  return fileName
+    .replace(/[_-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function collectCompanyLogos(): CompanyLogo[] {
+  if (!existsSync(logoDirectory)) {
+    return [];
+  }
+
+  const files = readdirSync(logoDirectory).filter((file) =>
+    logoExtensions.some((extension) => file.toLowerCase().endsWith(extension))
+  );
+
+  const extensionPriority = new Map<string, number>(
+    logoExtensions.map((extension, index) => [extension, index])
+  );
+
+  const logosByKey = new Map<string, { name: string; src: string; priority: number }>();
+
+  files.forEach((file) => {
+    const extension = path.extname(file).toLowerCase();
+    const key = file.slice(0, file.length - extension.length).toLowerCase();
+    const priority = extensionPriority.get(extension) ?? Number.MAX_SAFE_INTEGER;
+
+    const existing = logosByKey.get(key);
+    if (!existing || priority < existing.priority) {
+      logosByKey.set(key, {
+        name: formatLogoName(key),
+        src: `/companies_worked_at/${file}`,
+        priority,
+      });
+    }
+  });
+
+  return Array.from(logosByKey.values())
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map(({ name, src }) => ({ name, src }));
+}
+
+const companyLogos = collectCompanyLogos();
 
 export default function Home(): JSX.Element {
   return (
@@ -88,7 +144,21 @@ export default function Home(): JSX.Element {
             </div>
           </div>
 
-          <div className="flex items-center justify-center">
+          <div className="flex flex-col items-center gap-4">
+            <div className="trustpilot-tag">
+              <span className="trustpilot-tag__header">Excellent</span>
+              <div className="trustpilot-tag__stars" aria-hidden="true">
+                <span className="trustpilot-star" />
+                <span className="trustpilot-star" />
+                <span className="trustpilot-star" />
+                <span className="trustpilot-star" />
+                <span className="trustpilot-star" />
+              </div>
+              <div className="trustpilot-tag__footer">
+                <span className="trustpilot-score">4.8</span>
+                <span className="trustpilot-label">Trustpilot</span>
+              </div>
+            </div>
             <div className="surface-card relative aspect-[16/9] w-full max-w-[520px] overflow-hidden rounded-3xl">
               <div className="absolute inset-0 bg-gradient-to-br from-[var(--global-palette1)]/10 via-transparent to-[var(--global-palette2)]/15" />
               <div className="relative flex h-full flex-col items-center justify-center gap-4 px-10 text-center">
@@ -109,31 +179,32 @@ export default function Home(): JSX.Element {
           </div>
         </section>
 
-        <section className="grid gap-6 rounded-3xl border border-[var(--global-palette7)] bg-white p-8 shadow-lg sm:grid-cols-3">
-          <article className="space-y-2">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--global-palette5)]">
-              Pipelines
-            </h2>
-            <p className="text-sm text-[var(--global-palette4)]">
-              Wire together CI/CD workflows with guardrails, previews, and instant rollbacks.
+        <section className="space-y-6 rounded-3xl border border-[var(--global-palette7)] bg-white p-8 shadow-lg">
+          <div className="text-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[var(--global-palette5)]">
+              Our students work at
             </p>
-          </article>
-          <article className="space-y-2">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--global-palette5)]">
-              Observability
-            </h2>
-            <p className="text-sm text-[var(--global-palette4)]">
-              Centralize logs, metrics, and alerts so teams act on the same real-time data.
-            </p>
-          </article>
-          <article className="space-y-2">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-[var(--global-palette5)]">
-              Collaboration
-            </h2>
-            <p className="text-sm text-[var(--global-palette4)]">
-              Share dashboards and runbooks with context-rich annotations for smoother handoffs.
-            </p>
-          </article>
+          </div>
+          <div className="relative overflow-hidden">
+            <div className="logo-slider-track">
+              {[...companyLogos, ...companyLogos].map((logo, index) => (
+                <div key={`${logo.name}-${index}`} className="grid min-w-[140px] place-items-center px-6 py-4">
+                  <div className="logo-tile">
+                    <Image
+                      src={logo.src}
+                      alt={`${logo.name} logo`}
+                      width={160}
+                      height={64}
+                      sizes="(max-width: 768px) 90px, 120px"
+                      className="h-full w-auto object-contain mix-blend-multiply"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent" />
+          </div>
         </section>
       </main>
     </div>
