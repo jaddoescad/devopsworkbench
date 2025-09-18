@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { JSX } from "react";
 
 const items: { id: string; text: string }[] = [
@@ -6,9 +5,6 @@ const items: { id: string; text: string }[] = [
   { id: "k8s", text: "500+ Kubernetes Scenarios (Deployments, Ingress, Helm, Operators)" },
   { id: "cloud", text: "50+ End-to-End DevOps Projects (AWS, Azure, GCP)" },
   { id: "iac", text: "Terraform & Pulumi Infrastructure Labs (VPC, EKS/AKS/GKE, IAM)" },
-  { id: "observability", text: "Observability Stacks (Prometheus, Grafana, Loki, Tempo)" },
-  { id: "security", text: "DevSecOps Pipelines (SAST/DAST, OPA, Vault, SBOM)" },
-  { id: "networking", text: "Traffic & Reliability (NGINX, Istio, Argo Rollouts)" },
   { id: "automation", text: "Server Automation (Ansible, Packer, Docker buildx)" },
 ];
 
@@ -56,5 +52,4 @@ export default function DevOpsStartCoding(): JSX.Element {
     </section>
   );
 }
-
 

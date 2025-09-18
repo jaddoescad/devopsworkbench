@@ -4,6 +4,7 @@ import Image from "next/image";
 import type { JSX } from "react";
 import DevOpsTechGrid from "./components/DevOpsTechGrid";
 import DevOpsStartCoding from "./components/DevOpsStartCoding";
+import DevOpsCareerSection from "./components/DevOpsCareerSection";
 
 type CompanyLogo = {
   name: string;
@@ -212,6 +213,8 @@ export default function Home(): JSX.Element {
         <DevOpsTechGrid />
 
         <DevOpsStartCoding />
+
+        <DevOpsCareerSection />
       </main>
     </div>
   );
