@@ -10,6 +10,9 @@ import DevOpsCareerGrowth from "./components/DevOpsCareerGrowth";
 import DevOpsRoadmap from "./components/DevOpsRoadmap";
 import DevOpsInstructor from "./components/DevOpsInstructor";
 import BootcampComparison from "./components/BootcampComparison";
+import DevOpsAudience from "./components/DevOpsAudience";
+import DevOpsFAQ from "./components/DevOpsFAQ";
+import SiteFooter from "./components/SiteFooter";
 
 type CompanyLogo = {
   name: string;
@@ -230,7 +233,15 @@ export default function Home(): JSX.Element {
         <DevOpsCareerGrowth />
 
         <BootcampComparison />
+
+        <DevOpsAudience />
+
+        <DevOpsFAQ />
       </main>
+
+      <div className="mx-auto max-w-6xl px-6 pb-12 sm:px-10">
+        <SiteFooter />
+      </div>
     </div>
   );
 }
