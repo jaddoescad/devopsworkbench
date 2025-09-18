@@ -2,6 +2,8 @@ import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
 import Image from "next/image";
 import type { JSX } from "react";
+import DevOpsTechGrid from "./components/DevOpsTechGrid";
+import DevOpsStartCoding from "./components/DevOpsStartCoding";
 
 type CompanyLogo = {
   name: string;
@@ -206,6 +208,10 @@ export default function Home(): JSX.Element {
             <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent" />
           </div>
         </section>
+
+        <DevOpsTechGrid />
+
+        <DevOpsStartCoding />
       </main>
     </div>
   );
