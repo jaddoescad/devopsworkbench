@@ -11,6 +11,7 @@ import DevOpsRoadmap from "./components/DevOpsRoadmap";
 import DevOpsInstructor from "./components/DevOpsInstructor";
 import BootcampComparison from "./components/BootcampComparison";
 import DevOpsAudience from "./components/DevOpsAudience";
+import DevOpsSuccessStory from "./components/DevOpsSuccessStory";
 import DevOpsFAQ from "./components/DevOpsFAQ";
 import SiteFooter from "./components/SiteFooter";
 
@@ -231,6 +232,8 @@ export default function Home(): JSX.Element {
         <DevOpsInstructor />
 
         <DevOpsCareerGrowth />
+
+        <DevOpsSuccessStory />
 
         <BootcampComparison />
 

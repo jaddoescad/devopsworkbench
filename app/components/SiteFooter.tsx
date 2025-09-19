@@ -2,6 +2,7 @@ import type { JSX } from "react";
 import { RiLinkedinBoxLine, RiYoutubeLine, RiMailLine } from "react-icons/ri";
 
 const quickLinks = [
+  { label: "Alumni success", href: "#success-story" },
   { label: "Who we help", href: "#who-benefits" },
   { label: "FAQ", href: "#faq" },
   { label: "Get started", href: "#get-started" },
